@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DNS Lookup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px 0;
+            width: 300px;
+            font-size: 16px;
+        }
+        button {
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>DNS Lookup</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="domain" placeholder="Enter a domain (e.g., example.com)" required>
+        <button type="submit">Find IP</button>
+    </form>
+    <div class="result">
+        {% if ip_address %}
+            <p>IP Address: <strong>{{ ip_address }}</strong></p>
+        {% elif error_message %}
+            <p class="error">{{ error_message }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
